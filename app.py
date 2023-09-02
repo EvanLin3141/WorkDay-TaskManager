@@ -45,9 +45,6 @@ Users:
 Users can receive assign task by manager
 Send email, make their own task, edit task, delete task, complete task etc
 
-IMPORTANT: You may see error sometimes un upload pfp, that's bc
-apparently i ran out of space in the server. It should work fine if I had more
-Sorry.
 '''
 
 @app.before_request
