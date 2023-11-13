@@ -1,0 +1,52 @@
+{% extends 'home.html' %}
+
+{% block main_content%}
+<h2>Add Members</h2>
+<form action="" method="post" novalidate>
+    {{ form.hidden_tag() }}
+    {{ form.name.label() }}
+    {{ form.name() }}
+    {% for error in form.name.errors %}
+    <p class="error">{{ error }}</p>
+    {% endfor %}
+    <br />
+    {{ form.submit()}}
+</form>
+
+{{ message }}
+<h2>Your Team</h2>
+<table>
+    <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Manager ID</th>
+        <th scope="col">Status</th>
+    </tr>
+    {% for user in total_users %}
+    <tr>
+        <td>{{ user['username']}}</td>
+        <td>{{ user['email']}}</td>
+        <td>{{ user['manager_id']}}</td>
+        <td><a href="{{ url_for('remove_employee', user_id=user['user_id']) }}">Remove</a>
+    </tr>
+    {% endfor %}
+</table>
+<br>
+<h2>Available Employees</h2>
+<table>
+    <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Manager ID</th>
+        <th scope="col">Status</th>
+    </tr>
+    {% for user in not_my_users %}
+    <tr>
+        <td>{{ user['username']}}</td>
+        <td>{{ user['email']}}</td>
+        <td>{{ user['manager_id']}}</td>
+        <td><a href="{{ url_for('add_employee', user_id=user['user_id']) }}">Add</a>
+    </tr>
+    {% endfor %}
+
+    {% endblock%}

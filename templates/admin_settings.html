@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset='utf-8' />
+    <title>Work4Life</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='page.style.css') }}" />
+    <link rel='icon' href="{{ url_for('static', filename='favicon.ico') }}" />
+</head>
+
+<body>
+    <header>
+        <nav id="navbar">
+            <div class="navbar">
+                <h1>Work4Life</h1>
+                <ul>
+                    <li><a href="{{ url_for('admin_home') }}">Home</a></li>
+                    <li><a href="{{ url_for('admin_tab') }}">Employee Dashboard</a></li>
+                    <li><a href="{{ url_for('assign_task') }}">Assign Tasks</a></li>
+                    <li><a href="{{ url_for('send_mail') }}">Send Email</a></li>
+                    <li><a href="{{ url_for('admin_settings') }}">Settings</a></li>
+                    <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main id="settings_home">
+        <div id="setting-border">
+            <nav id="settings_navbar">
+                <div class="setting-box">
+                    <ul>
+                        <li><a href="{{ url_for('admin_reset_username') }}">Change Username</a></li>
+                        <li><a href="{{ url_for('admin_reset_password') }}">Change Password</a></li>
+                        <li><a href="{{ url_for('admin_reset_email') }}">Change Email</a></li>
+                        <li><a href="{{ url_for('admin_update_pfp') }}">Update PFP</a></li>
+                        <li><a href="{{ url_for('register_admin') }}">Register Admin</a></li>
+                    </ul>
+                </div>
+            </nav>
+
+
+
+            <section id="setting_content">
+                <div id="setting-block">
+                    {% block main_content %} {% endblock %}
+                </div>
+                <div class="flash">
+                    {% for message in get_flashed_messages() %}
+                    <h2>{{ message }}</h2>
+                    {% endfor %}
+                </div>
+            </section>
+        </div>
+    </main>
+</body>
+
+</html>

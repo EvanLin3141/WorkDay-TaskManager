@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset='utf-8' />
+    <title>Work4Life</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='page.style.css') }}" />
+    <link rel='icon' href="{{ url_for('static', filename='favicon.ico') }}" />
+</head>
+
+<body>
+    <header>
+        {% if g.admin %}
+        <nav id="navbar">
+            <div class="navbar">
+                <h1>Work4Life</h1>
+                <ul>
+                    <li><a href="{{ url_for('admin_home') }}">Home</a></li>
+                    <li><a href="{{ url_for('admin_tab') }}">Employee Dashboard</a></li>
+                    <li><a href="{{ url_for('assign_task') }}">Assign Tasks</a></li>
+                    <li><a href="{{ url_for('send_mail') }}">Send Email</a></li>
+                    <li><a href="{{ url_for('admin_settings') }}">Settings</a></li>
+                    <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                </ul>
+            </div>
+        </nav>
+        {% else %}
+        <nav id="navbar">
+            <div class="navbar">
+                <h1>Work4Life</h1>
+                <ul>
+                    <li><a href="{{ url_for('home') }}">Home</a></li>
+                    <li><a href="{{ url_for('task_dashboard') }}">Task Dashboard</a></li>
+                    <li><a href="{{ url_for('send_mail') }}">Send Email</a></li>
+                    <li><a href="{{ url_for('settings') }}">Settings</a></li>
+                    <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                </ul>
+            </div>
+        </nav>
+        {% endif %}
+    </header>
+    <main id="home">
+        <div id="home-border">
+            <section class='homepage'>
+                {% if g.user %}
+                <h2 class="welcomeuser">Welcome {{g.username}}</h2>
+                <br />
+                {% endif %}
+                {% if g.pfp %}
+                <img class='pfp' src="{{ url_for('static', filename='pfp/'+g.pfp) }}" alt="Profile Picture" />
+                {% else %}
+                <img class='pfp' src="{{ url_for('static', filename='pfp/default.jpg') }}"
+                    alt="Default Profile Picture" />
+                {% endif %}
+            </section>
+
+
+            <section id="home_maincontent">
+                <div id="home-box">
+                    {% block main_content %} {% endblock %}
+                </div>
+            </section>
+        </div>
+    </main>
+</body>
+
+</html>

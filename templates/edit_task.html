@@ -1,0 +1,46 @@
+{% extends 'home.html' %}
+
+{% block main_content %}
+<form id="edit_task_manager" action="" method="post" novalidate>
+    {{ form.hidden_tag()}}
+    {{ form.task.label()}}
+    {{ form.task(disabled=True) }}
+    {% for error in form.task.errors %}
+    <p class="error">{{ error }}</p>
+    {% endfor %}
+    <br />
+    {{ form.due_date.label()}}
+    {{ form.due_date() }}
+    {% for error in form.due_date.errors %}
+    <p class="error">{{ error }}</p>
+    {% endfor %}
+    <br />
+    {{ form.priority.label()}}
+    {{ form.priority() }}
+    {% for error in form.priority.errors %}
+    <p class="error">{{ error }}</p>
+    {% endfor %}
+    <br />
+    {{ form.task1.label()}}
+    {{ form.task1() }}
+    {% for error in form.task1.errors %}
+    <p class="error">{{ error }}</p>
+    {% endfor %}
+    <br />
+    {{ form.due_date1.label()}}
+    {{ form.due_date1() }}
+    {% for error in form.due_date1.errors %}
+    <p class="error">{{ error }}</p>
+    {% endfor %}
+    <br />
+    {{ form.priority1.label()}}
+    {{ form.priority1() }}
+    {% for error in form.priority1.errors %}
+    <p class="error">{{ error }}</p>
+    {% endfor %}
+    <br />
+    {{ form.save() }}
+</form>
+<a href="{{ url_for('task_dashboard') }}">Back</a></td>
+
+{% endblock %}

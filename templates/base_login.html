@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset='utf-8' />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <title>Work4Life</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+        <link rel='icon' href="{{ url_for('static', filename='favicon.ico') }}" />
+    </head>
+    <header>
+    </header>
+    <body>
+        {% block main_content %} {% endblock %}
+    </body>
+</html>

@@ -1,0 +1,18 @@
+{% extends 'base_login.html' %}
+
+{% block main_content%}
+<div class='forgot'>
+    <form class='loginpage' action="" method="post" novalidate>
+        {{ form.hidden_tag()}}
+        {{ form.email.label() }}
+        {{ form.email() }}
+        {% for error in form.email.errors %}
+        <p class="error">{{ error }}</p>
+        {% endfor %}
+        <br />
+        {{ form.submit()}}
+        <p class ="forgoturl"><a href="{{ url_for('login') }}">Back</a></p>
+    </form>
+    
+</div>
+{%endblock%}

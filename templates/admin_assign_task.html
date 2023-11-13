@@ -1,0 +1,80 @@
+{%extends 'home.html'%}
+
+{% block main_content%}
+<form id="manager_assign_task" action="" method="post" novalidate>
+    {{ form.hidden_tag()}}
+    {{ form.name.label()}}
+    {{ form.name() }}
+    {% for error in form.name.errors %}
+    <p class="error">{{ error }}</p>
+    {% endfor %}
+    <br />
+    {{ form.task.label()}}
+    {{ form.task() }}
+    {% for error in form.task.errors %}
+    <p class="error">{{ error }}</p>
+    {% endfor %}
+    <br />
+    {{ form.due_date.label()}}
+    {{ form.due_date() }}
+    {% for error in form.due_date.errors %}
+    <p class="error">{{ error }}</p>
+    {% endfor %}
+    <br />
+    {{ form.priority.label()}}
+    {{ form.priority() }}
+    {% for error in form.priority.errors %}
+    <p class="error">{{ error }}</p>
+    {% endfor %}
+    <br />
+    {{ form.save() }}
+</form>
+
+<h2>Tasks Assigned</h2>
+<table>
+    <tr>
+        <th scope="col">User ID</th>
+        <th scope="col">Title</th>
+        <th scope="col">Due Date</th>
+        <th scope="col">Priority</th>
+        <th scope="col">Status</th>
+        <th scope="col">Delete</th>
+    </tr>
+    {% for task in assigned_tasks %}
+    <tr>
+        <td>{{ task['task_user_id']}}</td>
+        <td>{{ task['task_title']}}</td>
+        <td>{{ task['task_due_date']}}</td>
+        <td>{{ task['priority']}}</td>
+        <td>{{ task['status']}}</td>
+        <td> <a href="{{ url_for('manager_delete_task', task_id=task['task_id']) }}">Delete</a></td>
+    </tr>
+    {% endfor %}
+</table>
+
+<br/>
+
+{% if overdue_tasks %}
+<h2> Overdue Tasks </h2>
+<table> 
+    <tr>
+        <th>Title</th>
+        <th>Due Date</th>
+        <th>Priority</th>
+    </tr>
+    {% for overdue in overdue_tasks %}
+    <tr>
+        <td>{{ overdue['task_title']}}</td>
+        <td>{{ overdue['task_due_date']}}</td>
+        <td>{{ overdue['priority']}}</td>
+    </tr>
+    {% endfor %}
+{%else%}
+<h2>No Overdue tasks</h2>
+</table>
+{%endif%}
+
+
+
+
+{% endblock %}

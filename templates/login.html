@@ -1,0 +1,36 @@
+{% extends 'base_login.html' %}
+
+{% block main_content%}
+<div class="flash">
+    {% for message in get_flashed_messages() %}
+    <h2>{{ message }}</h2>
+    {% endfor %}
+</div>
+<section id='login'>
+    <form class='loginpage' action="" method="post" novalidate>
+        <h2>Login</h2>
+        {{ form.hidden_tag() }}
+        {{ form.username.label() }}
+        {{ form.username() }}
+        <br />
+        {% for error in form.username.errors %}
+        <p class="error">{{ error }}</p>
+        {% endfor %}
+        <br />
+        {{ form.password.label }}
+        {{ form.password() }}
+        {% for error in form.password.errors %}
+        <p class="error">{{ error }}</p>
+        {% endfor %}
+        <br />
+        {{ form.submit()}}
+        {% if message%}
+        <p>{{message}}</p>
+        {% endif %}
+        <p><a href="{{ url_for('manager_login') }}">Login as Manager</a></p>
+        <p><a href="{{ url_for('forgot_password') }}">Forgot Password</a></p>
+    </form>
+    <p><a href="{{ url_for('register') }}">Make an account</a></p>
+</section>
+
+{% endblock%}

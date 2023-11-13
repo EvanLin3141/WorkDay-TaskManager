@@ -1,0 +1,20 @@
+{% extends 'base_login.html' %}
+{% block main_content%}
+<form class='loginpage' action="" method="post" novalidate>
+    {{ form.hidden_tag()}}
+    {{ form.password.label() }}
+    {{ form.password() }}
+    {% for error in form.password.errors %}
+    <p class="error">{{ error }}</p>
+    {% endfor %}
+    <br />
+    {{ form.hidden_tag()}}
+    {{ form.password2.label() }}
+    {{ form.password2() }}
+    {% for error in form.password2.errors %}
+    <p class="error">{{ error }}</p>
+    {% endfor %}
+    <br />
+    {{ form.submit()}}
+</form>
+{%endblock%}

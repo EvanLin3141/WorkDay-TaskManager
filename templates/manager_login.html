@@ -1,0 +1,26 @@
+{% extends 'base_login.html' %}
+
+{% block main_content%}
+<section id = 'login'>
+    <form class = 'loginpage' action="" method ="post" novalidate>
+        <h2>Manager Login</h2>
+        {{ form.hidden_tag() }}
+        {{ form.username.label() }}
+        {{ form.username() }}
+        <br/>
+        {% for error in form.username.errors %}
+        <p class="error">{{ error }}</p>
+        {% endfor %}
+        <br/>
+        {{ form.password.label }}
+        {{ form.password() }}
+        {% for error in form.password.errors %}
+        <p class="error">{{ error }}</p>
+        {% endfor %}
+        <br/>
+        {{ form.submit()}}
+    </form>
+    <p class ="loginurl"><a href="{{ url_for('login') }}">Back</a></p>
+</section>
+
+{% endblock%}

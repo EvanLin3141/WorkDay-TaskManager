@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset='utf-8' />
+    <title>Work4Life</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='page.style.css') }}" />
+    <link rel='icon' href="{{ url_for('static', filename='favicon.ico') }}" />
+</head>
+
+<body>
+    <header>
+        {% if g.admin %}
+        <nav id="navbar">
+            <div class="navbar">
+                <h1>Work4Life</h1>
+                <ul>
+                    <li><a href="{{ url_for('admin_home') }}">Home</a></li>
+                    <li><a href="{{ url_for('admin_tab') }}">Employee Dashboard</a></li>
+                    <li><a href="{{ url_for('assign_task') }}">Assign Tasks</a></li>
+                    <li><a href="{{ url_for('send_mail') }}">Send Email</a></li>
+                    <li><a href="{{ url_for('admin_settings') }}">Settings</a></li>
+                    <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                </ul>
+            </div>
+        </nav>
+        {% else %}
+        <nav id="navbar">
+            <div class="navbar">
+                <h1>Work4Life</h1>
+                <ul>
+                    <li><a href="{{ url_for('home') }}">Home</a></li>
+                    <li><a href="{{ url_for('task_dashboard') }}">Task Dashboard</a></li>
+                    <li><a href="{{ url_for('send_mail') }}">Send Email</a></li>
+                    <li><a href="{{ url_for('settings') }}">Settings</a></li>
+                    <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                </ul>
+            </div>
+        </nav>
+        {% endif %}
+    </header>
+
+    <main id="mail">
+        <div id="mail-border">
+            <section class='mailpage'>
+                {% if g.user %}
+                <h1>Welcome {{g.username}}</h1>
+                {% endif %}
+                {% if g.pfp %}
+                <img class='pfp' src="{{ url_for('static', filename='pfp/'+g.pfp) }}" alt="Profile Picture" />
+                {% else %}
+                <img class='pfp' src="{{ url_for('static', filename='pfp/default.jpg') }}"
+                    alt="Default Profile Picture" />
+                {% endif %}
+            </section>
+
+            <nav id="settings_navbar">
+                <ul>
+                    <li><a href="{{ url_for('send_mail') }}">Email Colleagues</a></li>
+                    <li><a href="{{ url_for('admin_send_mail') }}">Email Admin</a></li>
+                </ul>
+            </nav>
+
+
+            <section id="mail_maincontent">
+                <div id="mail-box">
+                    {% block main_content %} {% endblock %}
+                </div>
+            </section>
+        </div>
+    </main>
+</body>
+
+</html>

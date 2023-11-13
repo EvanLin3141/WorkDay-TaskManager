@@ -1,0 +1,21 @@
+{% extends 'settings.html' %}
+
+{% block main_content %}
+<form action="" method="post" novalidate enctype="multipart/form-data">
+    {{ form.hidden_tag()}}
+    {{ form.pfp.label()}}
+    {{ form.pfp() }}
+    {% for error in form.pfp.errors %}
+    {{ error }}
+    {% endfor %}
+    <br />
+    {{ form.save() }}
+
+    <div class="flash">
+        {% for message in get_flashed_messages() %}
+        <h2>{{ message }}</h2>
+        {% endfor %}
+    </div>
+</form>
+{% endblock %}
+

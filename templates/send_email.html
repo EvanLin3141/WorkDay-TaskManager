@@ -1,0 +1,35 @@
+{% extends 'mail_home.html'%}
+
+{% block main_content %}
+<h1>Email Colleagues</h1>
+<form action="" method="post" novalidate>
+    {{ form.hidden_tag() }}
+    {{ form.email.label() }}
+    {{ form.email() }}
+    {% for error in form.email.errors %}
+    <p class="error">{{ error }}</p>
+    {% endfor %}
+    <br />
+    {{ form.title.label }}
+    {{ form.title() }}
+    {% for error in form.title.errors %}
+    <p class="error">{{ error }}</p>
+    {% endfor %}
+    <br />
+    <div class='emailbody'>
+        {{ form.body.label }}
+        {{ form.body() }}
+        {% for error in form.body.errors %}
+        <p class="error">{{ error }}</p>
+        {% endfor %}
+    </div>
+    <br />
+    {{ form.send()}}
+</form>
+
+<div class="flash">
+    {% for message in get_flashed_messages() %}
+    <h2>{{ message }}</h2>
+    {% endfor %}
+</div>
+{% endblock %}

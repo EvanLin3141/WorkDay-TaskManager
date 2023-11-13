@@ -1,0 +1,8 @@
+{% extends 'home.html' %}
+
+{% block main_content %}
+    {% if profile %}
+    <p>Username: {{profile['username']}}</p>
+    <p>Email: {{profile['email']}}</p>
+    {% endif %}
+{% endblock%}

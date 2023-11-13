@@ -1,0 +1,25 @@
+{% extends 'settings.html' %}
+{% block main_content%}
+<form action="" method="post" novalidate>
+    {{ form.hidden_tag()}}
+    {{ form.email.label()}}
+    {{ form.email() }}
+    {% for error in form.email.errors %}
+    <p class="error">{{ error }}</p>
+    {% endfor %}
+    <br />
+    {{ form.new_email.label()}}
+    {{ form.new_email() }}
+    {% for error in form.new_email.errors %}
+    <p class="error">{{ error }}</p>
+    {% endfor %}
+    <br />
+    {{ form.confirm_new_email.label()}}
+    {{ form.confirm_new_email() }}
+    {% for error in form.confirm_new_email.errors %}
+    <p class="error">{{ error }}</p>
+    {% endfor %}
+    <br />
+    {{ form.save() }}
+</form>
+{% endblock %}

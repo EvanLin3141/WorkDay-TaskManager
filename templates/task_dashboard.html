@@ -1,0 +1,92 @@
+{% extends 'home.html' %}
+
+{% block main_content %}
+<form id="task_dashboard" action="" method="post" novalidate>
+    {{ form.hidden_tag()}}
+    {{ form.task.label()}}
+    {{ form.task() }}
+    {% for error in form.task.errors %}
+    <p class="error">{{ error }}</p>
+    {% endfor %}
+    <br />
+    {{ form.due_date.label()}}
+    {{ form.due_date() }}
+    {% for error in form.due_date.errors %}
+    <p class="error">{{ error }}</p>
+    {% endfor %}
+    <br />
+    {{ form.priority.label()}}
+    {{ form.priority() }}
+    {% for error in form.priority.errors %}
+    <p class="error">{{ error }}</p>
+    {% endfor %}
+    <br />
+    {{ form.save() }}
+</form>
+{% if message %}
+{{message}}
+{% endif %}
+<br />
+<br />
+<h2> Tasks Assigned</h2>
+<table>
+    <tr>
+        <th scope="col">Title</th>
+        <th scope="col">Due Date</th>
+        <th scope="col">Priority</th>
+        <th scope="col" colspan="3">Status</th>
+    </tr>
+    {% for tasks in total_tasks %}
+    <tr>
+        <td>{{ tasks['task_title']}}</td>
+        <td>{{ tasks['task_due_date']}}</td>
+        <td>{{ tasks['priority']}}</td>
+        <td><a href="{{ url_for('complete_task', task_id=tasks['task_id']) }}">Complete</a> -
+            <a href="{{ url_for('delete_task', task_id=tasks['task_id']) }}">Delete</a> -
+            <a href="{{ url_for('edit_task', task_id=tasks['task_id']) }}">Edit Task</a></td>
+    </tr>
+    {% endfor %}
+</table>
+
+<br />
+<h2> Completed Tasks </h2>
+<table> 
+    <tr>
+        <th scope="col">Title</th>
+        <th scope="col">Due Date</th>
+        <th scope="col">Priority</th>
+        
+    </tr>
+    {% for complete_tasks in completed_tasks %}
+    <tr>
+        <td>{{ complete_tasks['task_title']}}</td>
+        <td>{{ complete_tasks['task_due_date']}}</td>
+        <td>{{ complete_tasks['priority']}}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<br/>
+{% if overdue_tasks %}
+<h2> Overdue Tasks </h2>
+<table> 
+    <tr>
+        <th>Title</th>
+        <th>Due Date</th>
+        <th>Priority</th>
+    </tr>
+    {% for overdue in overdue_tasks %}
+    <tr>
+        <td>{{ overdue['task_title']}}</td>
+        <td>{{ overdue['task_due_date']}}</td>
+        <td>{{ overdue['priority']}}</td>
+    </tr>
+    {% endfor %}
+{%else%}
+<h2>No Overdue tasks</h2>
+</table>
+{%endif%}
+
+
+
+{% endblock %}
